@@ -1,0 +1,227 @@
+﻿@model IEnumerable<Proyecto_Tienda_Malena.Models.Productos>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="col-8  Destacados-categorias">
+
+    <div class="col-12">
+        <div class="col-12 centrar">
+            
+        </div>
+
+    </div>
+
+
+        <div class="col-12 centrar">
+            <h2>Destacados</h2>
+        </div>
+
+        @foreach (var item in Model)
+        {
+
+            if (item.Destacado == true)
+            {
+
+                <article class="col-12 centrar">
+                    <div class="Producto Producto-destacado">
+                        <img src="@Url.Action("getImage", "Productos", new {id= item.ID_Producto})"  class="card-img-top" alt="..." />
+
+                        <div class="container Producto-info">
+                            <div class="row text-center">
+                                <div class="col" id="titulo"><a>@Html.ActionLink(item.Nombre_Producto, "Details", new { id = item.ID_Producto })</a></div>
+                            </div>
+                            <div class="row text-center">
+                                @if (item.Descuento > 0 && item.Descuento != null)
+                                {
+
+                                    var descuento = item.Precio * item.Descuento / 100;
+                                    var precioFinal = item.Precio - descuento;
+
+
+                                    <div class="col" id="precio">Descuento Aplicado: ₡@precioFinal</div>
+                                }
+                                else
+                                {
+                                    <div class="col" id="precio">Precio: ₡@item.Precio</div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            }
+
+        }
+    </div>
+
+    <div class="categorias">
+        <div class="col-12 centrar">
+            <h2>Zapatos</h2>
+        </div>
+
+
+
+        <div class="col-12 categorias-productos slider owl-carousel">
+
+            @foreach (var item in Model)
+            {
+
+                if (item.ID_Categoria == 1)
+                {
+                    <article class="col-4">
+                        <div class="Producto Prodcto-categorias">
+                            <img src="@Url.Action("getImage", "Productos", new {id= item.ID_Producto})"  class="card-img-top" alt="..."/>
+
+                            <div class="container Producto-info">
+                                <div class="row text-center">
+                                    <div class="col" id="titulo"><a>@Html.ActionLink(item.Nombre_Producto, "Details", new { id = item.ID_Producto })</a></div>
+                                </div>
+                                <div class="row text-center">
+                                    @if (item.Descuento > 0 && item.Descuento != null)
+                                    {
+
+                                        var descuento = item.Precio * item.Descuento / 100;
+                                        var precioFinal = item.Precio - descuento;
+
+
+                                        <div class="col" id="precio">Descuento Aplicado: ₡@precioFinal</div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col" id="precio">Precio: ₡@item.Precio</div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="categorias">
+        <div class="col-12 centrar">
+            <h2>Consolas</h2>
+        </div>
+        <div class="col-12 categorias-productos slider owl-carousel">
+            @foreach (var item in Model)
+            {
+
+                if (item.ID_Categoria == 2)
+                {
+                    <article class="col-4">
+                        <div class="Producto Prodcto-categorias">
+                            <img src="@Url.Action("getImage", "Productos", new {id= item.ID_Producto})"   class="card-img-top" alt="..."/>
+
+                            <div class="container Producto-info">
+                                <div class="row text-center">
+                                    <div class="col" id="titulo"><a>@Html.ActionLink(item.Nombre_Producto, "Details", new { id = item.ID_Producto })</a></div>
+                                </div>
+                                <div class="row text-center">
+                                    @if (item.Descuento > 0 && item.Descuento != null)
+                                    {
+
+                                        var descuento = item.Precio * item.Descuento / 100;
+                                        var precioFinal = item.Precio - descuento;
+
+
+                                        <div class="col" id="precio">Desc: ₡@precioFinal</div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col" id="precio">₡@item.Precio</div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="categorias">
+        <div class="col-12 centrar">
+            <h2>Accesorios</h2>
+        </div>
+        <div class="col-12  categorias-productos slider owl-carousel">
+            @foreach (var item in Model)
+            {
+                if (item.ID_Categoria == 3)
+                {
+                    <article class="col-4">
+                        <div class="Producto Prodcto-categorias">
+                            <img src="@Url.Action("getImage", "Productos", new {id= item.ID_Producto})"  class="card-img-top" alt="..."/>
+
+                            <div class="container Producto-info">
+                                <div class="row text-center">
+                                    <div class="col" id="titulo"><a>@Html.ActionLink(item.Nombre_Producto, "Details", new { id = item.ID_Producto })</a></div>
+                                </div>
+                                <div class="row text-center">
+                                    @if (item.Descuento > 0 && item.Descuento != null)
+                                    {
+
+                                        var descuento = item.Precio * item.Descuento / 100;
+                                        var precioFinal = item.Precio - descuento;
+
+
+                                        <div class="col" id="precio">Desc: ₡@precioFinal</div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col" id="precio">₡@item.Precio</div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                }
+            }
+        </div>
+    </div>
+
+</div>
+
+<div class="col-4 Descuentos">
+
+    <div class="col-12 centrar">
+        <h2>Descuentos</h2>
+    </div>
+
+    @foreach (var item in Model)
+    {
+
+        if (item.Descuento > 0)
+        {
+            <article class="col-12 centrar">
+                <div class="Producto Producto-descuento">
+                    <img src="@Url.Action("getImage", "Productos", new {id= item.ID_Producto})"  class="card-img-top" alt="..." />
+
+                    <div class="container Producto-info">
+                        <div class="row text-center">
+                            <div class="col" id="titulo"><a>@Html.ActionLink(item.Nombre_Producto, "Details", new { id = item.ID_Producto })</a></div>
+                        </div>
+                        <div class="row text-center">
+                            @{
+                                var precio = item.Precio;
+
+                                var descuento = item.Precio * item.Descuento / 100;
+                                var precioFinal = item.Precio - descuento;
+                            }
+                            <div class="col" id="precio">Descuento: ₡@precioFinal</div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        }
+
+    }
+
+</div>
+
+
+
+
+
+    <script src="~/JS/Carrusel.js"></script>

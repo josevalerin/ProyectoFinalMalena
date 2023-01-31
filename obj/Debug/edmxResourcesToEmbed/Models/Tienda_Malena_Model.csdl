@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Proyecto_Tienda_MalenaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Categorias">
+    <Key>
+      <PropertyRef Name="ID_Categoria" />
+    </Key>
+    <Property Name="ID_Categoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre_Categoria" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Productos" Relationship="Self.FK__Productos__ID_Ca__3B75D760" FromRole="Categorias" ToRole="Productos" />
+  </EntityType>
+  <EntityType Name="Comentarios">
+    <Key>
+      <PropertyRef Name="ID_Comentario" />
+    </Key>
+    <Property Name="ID_Comentario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Comentario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Sede" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ID_Usuario" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.FK__Comentari__ID_Us__38996AB5" FromRole="Comentarios" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="Factura">
+    <Key>
+      <PropertyRef Name="ID_Factura" />
+    </Key>
+    <Property Name="ID_Factura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FECHA_Factura" Type="DateTime" Precision="0" />
+    <Property Name="Cantidad" Type="Int32" Nullable="false" />
+    <Property Name="Precio" Type="Int32" Nullable="false" />
+    <Property Name="ID_Producto" Type="Int32" Nullable="false" />
+    <Property Name="ID_Usuario" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Productos" Relationship="Self.FK__Factura__ID_Prod__398D8EEE" FromRole="Factura" ToRole="Productos" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.FK__Factura__ID_Usua__3A81B327" FromRole="Factura" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="Marcas">
+    <Key>
+      <PropertyRef Name="ID_Marca" />
+    </Key>
+    <Property Name="ID_Marca" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre_marca" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Productos" Relationship="Self.FK__Productos__ID_Ma__3C69FB99" FromRole="Marcas" ToRole="Productos" />
+  </EntityType>
+  <EntityType Name="Productos">
+    <Key>
+      <PropertyRef Name="ID_Producto" />
+    </Key>
+    <Property Name="ID_Producto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_Categoria" Type="Int32" />
+    <Property Name="ID_Marca" Type="Int32" />
+    <Property Name="Nombre_Producto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Imagen_Producto" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Descripcion_Producto" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Stock" Type="Int32" />
+    <Property Name="Precio" Type="Int32" />
+    <Property Name="Descuento" Type="Int32" />
+    <Property Name="Destacado" Type="Boolean" />
+    <NavigationProperty Name="Categorias" Relationship="Self.FK__Productos__ID_Ca__3B75D760" FromRole="Productos" ToRole="Categorias" />
+    <NavigationProperty Name="Factura" Relationship="Self.FK__Factura__ID_Prod__398D8EEE" FromRole="Productos" ToRole="Factura" />
+    <NavigationProperty Name="Marcas" Relationship="Self.FK__Productos__ID_Ma__3C69FB99" FromRole="Productos" ToRole="Marcas" />
+    <NavigationProperty Name="Review" Relationship="Self.FK__Review__ID_Produ__3D5E1FD2" FromRole="Productos" ToRole="Review" />
+  </EntityType>
+  <EntityType Name="Proveedores">
+    <Key>
+      <PropertyRef Name="id_Proveedor" />
+    </Key>
+    <Property Name="id_Proveedor" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Apellidos" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Telefono" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Review">
+    <Key>
+      <PropertyRef Name="ID_Review" />
+    </Key>
+    <Property Name="ID_Review" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_Producto" Type="Int32" Nullable="false" />
+    <Property Name="ID_Usuario" Type="Int32" Nullable="false" />
+    <Property Name="Comentario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Estrellas" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Productos" Relationship="Self.FK__Review__ID_Produ__3D5E1FD2" FromRole="Review" ToRole="Productos" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.FK__Review__ID_Usuar__3E52440B" FromRole="Review" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="ROLES">
+    <Key>
+      <PropertyRef Name="ID_ROL" />
+    </Key>
+    <Property Name="ID_ROL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ROL" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.FK__Usuarios__ID_ROL__3F466844" FromRole="ROLES" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="Sede">
+    <Key>
+      <PropertyRef Name="id_Sede" />
+    </Key>
+    <Property Name="id_Sede" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Direccion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="ID_Usuario" />
+    </Key>
+    <Property Name="ID_Usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_ROL" Type="Int32" Nullable="false" />
+    <Property Name="Cedula" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="Nombre_Usuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Clave" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Telefono" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Comentarios" Relationship="Self.FK__Comentari__ID_Us__38996AB5" FromRole="Usuarios" ToRole="Comentarios" />
+    <NavigationProperty Name="Factura" Relationship="Self.FK__Factura__ID_Usua__3A81B327" FromRole="Usuarios" ToRole="Factura" />
+    <NavigationProperty Name="Review" Relationship="Self.FK__Review__ID_Usuar__3E52440B" FromRole="Usuarios" ToRole="Review" />
+    <NavigationProperty Name="ROLES" Relationship="Self.FK__Usuarios__ID_ROL__3F466844" FromRole="Usuarios" ToRole="ROLES" />
+  </EntityType>
+  <Association Name="FK__Productos__ID_Ca__3B75D760">
+    <End Role="Categorias" Type="Self.Categorias" Multiplicity="0..1" />
+    <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categorias">
+        <PropertyRef Name="ID_Categoria" />
+      </Principal>
+      <Dependent Role="Productos">
+        <PropertyRef Name="ID_Categoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Comentari__ID_Us__38996AB5">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+    <End Role="Comentarios" Type="Self.Comentarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="ID_Usuario" />
+      </Principal>
+      <Dependent Role="Comentarios">
+        <PropertyRef Name="ID_Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Factura__ID_Prod__398D8EEE">
+    <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+    <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Productos">
+        <PropertyRef Name="ID_Producto" />
+      </Principal>
+      <Dependent Role="Factura">
+        <PropertyRef Name="ID_Producto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Factura__ID_Usua__3A81B327">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+    <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="ID_Usuario" />
+      </Principal>
+      <Dependent Role="Factura">
+        <PropertyRef Name="ID_Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Productos__ID_Ma__3C69FB99">
+    <End Role="Marcas" Type="Self.Marcas" Multiplicity="0..1" />
+    <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Marcas">
+        <PropertyRef Name="ID_Marca" />
+      </Principal>
+      <Dependent Role="Productos">
+        <PropertyRef Name="ID_Marca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Review__ID_Produ__3D5E1FD2">
+    <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+    <End Role="Review" Type="Self.Review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Productos">
+        <PropertyRef Name="ID_Producto" />
+      </Principal>
+      <Dependent Role="Review">
+        <PropertyRef Name="ID_Producto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Review__ID_Usuar__3E52440B">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+    <End Role="Review" Type="Self.Review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="ID_Usuario" />
+      </Principal>
+      <Dependent Role="Review">
+        <PropertyRef Name="ID_Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Usuarios__ID_ROL__3F466844">
+    <End Role="ROLES" Type="Self.ROLES" Multiplicity="1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ROLES">
+        <PropertyRef Name="ID_ROL" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="ID_ROL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Proyecto_Tienda_MalenaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categorias" EntityType="Self.Categorias" />
+    <EntitySet Name="Comentarios" EntityType="Self.Comentarios" />
+    <EntitySet Name="Factura" EntityType="Self.Factura" />
+    <EntitySet Name="Marcas" EntityType="Self.Marcas" />
+    <EntitySet Name="Productos" EntityType="Self.Productos" />
+    <EntitySet Name="Proveedores" EntityType="Self.Proveedores" />
+    <EntitySet Name="Review" EntityType="Self.Review" />
+    <EntitySet Name="ROLES" EntityType="Self.ROLES" />
+    <EntitySet Name="Sede" EntityType="Self.Sede" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+    <AssociationSet Name="FK__Productos__ID_Ca__3B75D760" Association="Self.FK__Productos__ID_Ca__3B75D760">
+      <End Role="Categorias" EntitySet="Categorias" />
+      <End Role="Productos" EntitySet="Productos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Comentari__ID_Us__38996AB5" Association="Self.FK__Comentari__ID_Us__38996AB5">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Comentarios" EntitySet="Comentarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Factura__ID_Prod__398D8EEE" Association="Self.FK__Factura__ID_Prod__398D8EEE">
+      <End Role="Productos" EntitySet="Productos" />
+      <End Role="Factura" EntitySet="Factura" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Factura__ID_Usua__3A81B327" Association="Self.FK__Factura__ID_Usua__3A81B327">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Factura" EntitySet="Factura" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Productos__ID_Ma__3C69FB99" Association="Self.FK__Productos__ID_Ma__3C69FB99">
+      <End Role="Marcas" EntitySet="Marcas" />
+      <End Role="Productos" EntitySet="Productos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Review__ID_Produ__3D5E1FD2" Association="Self.FK__Review__ID_Produ__3D5E1FD2">
+      <End Role="Productos" EntitySet="Productos" />
+      <End Role="Review" EntitySet="Review" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Review__ID_Usuar__3E52440B" Association="Self.FK__Review__ID_Usuar__3E52440B">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Review" EntitySet="Review" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Usuarios__ID_ROL__3F466844" Association="Self.FK__Usuarios__ID_ROL__3F466844">
+      <End Role="ROLES" EntitySet="ROLES" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
