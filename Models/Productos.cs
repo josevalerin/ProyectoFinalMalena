@@ -23,6 +23,7 @@ namespace Proyecto_Tienda_Malena.Models
     
         public int ID_Producto { get; set; }
         public Nullable<int> ID_Categoria { get; set; }
+        public Nullable<int> ID_Genero { get; set; }
         public Nullable<int> ID_Marca { get; set; }
         public string Nombre_Producto { get; set; }
         public byte[] Imagen_Producto { get; set; }
@@ -35,6 +36,7 @@ namespace Proyecto_Tienda_Malena.Models
         public virtual Categorias Categorias { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Factura> Factura { get; set; }
+        public virtual Genero Genero { get; set; }
         public virtual Marcas Marcas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Review> Review { get; set; }

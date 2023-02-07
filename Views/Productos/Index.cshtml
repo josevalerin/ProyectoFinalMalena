@@ -3,79 +3,107 @@
 @{
     ViewBag.Title = "Index";
 }
+<hr>
+<hr>
+<hr>
+<hr>
+<br>
+<br>
+<br>
+<br>
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nombre_Producto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Imagen_Producto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Descripcion_Producto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Stock)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Precio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Descuento)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Destacado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Categorias.Nombre_Categoria)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Marcas.Nombre_marca)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre_Producto)
-        </td>
-        <td>
-                <img src="@Url.Action("getImage", "Productos", new { id = item.ID_Producto })" />
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descripcion_Producto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Stock)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Precio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descuento)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Destacado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Categorias.Nombre_Categoria)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Marcas.Nombre_marca)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID_Producto }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID_Producto }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID_Producto })
-        </td>
-    </tr>
-}
+<div class="tabla">
 
-</table>
+    <h2>Producto</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+
+
+
+    <div class="search-box d-flex">
+        <div class="iconn-box">
+            <svg xmlns="http://www.w3.org/2000/svg" class="search-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+            </svg>
+        </div>
+        <input id="search-input" type="text" name="search-input" value="" placeholder="escriba algo para buscar">
+    </div>
+
+    <table class="table table-striped tabla-sortable tabla-search">
+        <BR>
+        <thead>
+            <tr class="header-tabla">
+                <th>
+                    Nombre del Producto
+                </th>
+                <th>
+                    Imagen del Producto
+                </th>
+                <th>
+                    Descripcion del Producto
+                </th>
+                <th>
+                    Cantidad en Inventario
+                </th>
+                <th>
+                    Precio:
+                </th>
+                <th>
+                    Descuento:
+                </th>
+                <th>
+                    Destacado SI / NO
+                </th>
+                <th>
+                    Nombre de la Categoria
+                </th>
+                <th>
+                    Nombre de la Marca
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre_Producto) 
+                    </td>
+                    <td>
+                        <img style="height: 35%; width: 35%; " src="@Url.Action("getImage", "Productos", new { id = item.ID_Producto })" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descripcion_Producto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Stock)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Precio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descuento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Destacado)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Categorias.Nombre_Categoria)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Marcas.Nombre_marca)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.ID_Producto }) |
+                        @Html.ActionLink("Detalles", "Details", new { id = item.ID_Producto }) |
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.ID_Producto })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

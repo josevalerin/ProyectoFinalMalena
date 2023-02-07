@@ -28,6 +28,7 @@ namespace Proyecto_Tienda_Malena.Models
         public virtual DbSet<Categorias> Categorias { get; set; }
         public virtual DbSet<Comentarios> Comentarios { get; set; }
         public virtual DbSet<Factura> Factura { get; set; }
+        public virtual DbSet<Genero> Genero { get; set; }
         public virtual DbSet<Marcas> Marcas { get; set; }
         public virtual DbSet<Productos> Productos { get; set; }
         public virtual DbSet<Proveedores> Proveedores { get; set; }

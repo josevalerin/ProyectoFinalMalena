@@ -1,13 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Security;
 using Proyecto_Tienda_Malena.Models;
-
 namespace TiendaVideojuegos.Controllers
 {
     public class HomeController : Controller
@@ -17,14 +23,45 @@ namespace TiendaVideojuegos.Controllers
         public ActionResult Index()
         {
             var productos = db.Productos.Include(p => p.Categorias).Include(p => p.Marcas);
+            ViewBag.ID_Categoria = new SelectList(db.Categorias, "ID_Categoria", "Nombre_Categoria");
+            ViewBag.ID_Marca = new SelectList(db.Marcas, "ID_Marca", "Nombre_marca");
+            ViewBag.ID_Genero = new SelectList(db.Genero, "ID_Genero", "Nombre_Genero");
+
             return View(productos.ToList());
         }
+
+
+        [HttpPost]
+        public ActionResult Index(string Categoria, string Nombre, string Genero)
+        {
+            var productos = db.Productos.Where(a => a.Categorias.Nombre_Categoria.Contains(Categoria) &&
+            a.Nombre_Producto.Contains(Nombre) &&
+            a.Genero.Nombre_Genero.Contains(Genero)).OrderBy(a => a.Categorias.Nombre_Categoria).ToList();
+
+            return View(productos);
+
+        }
+
+
+
 
 
         public ActionResult InicioSesion()
         {
             return View();
         }
+
+        public ActionResult Pruebas()
+        {
+            var productos = db.Productos.Include(p => p.Categorias).Include(p => p.Marcas);
+
+            ViewBag.ID_Categoria = new SelectList(db.Categorias, "ID_Categoria", "Nombre_Categoria");
+            ViewBag.ID_Marca = new SelectList(db.Marcas, "ID_Marca", "Nombre_marca");
+            ViewBag.ID_Genero = new SelectList(db.Genero, "ID_Genero", "Nombre_Genero");
+
+            return View();
+        }
+
 
 
         [HttpPost]
@@ -147,10 +184,5 @@ namespace TiendaVideojuegos.Controllers
             return View(accesorios.ToList());
         }
 
-        public ActionResult Videojuegos()
-        {
-            var videojuegos = db.Productos.Where(x => x.ID_Categoria== 1);
-            return View(videojuegos);
-        }
     }
 }

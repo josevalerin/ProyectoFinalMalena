@@ -8,6 +8,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
@@ -26,6 +27,24 @@ namespace Proyecto_Tienda_Malena.Controllers
             return View(productos.ToList());
         }
 
+        [HttpPost]
+        public ActionResult Index(string Nombre)
+        {
+            var productos = db.Productos.Where(a => a.Nombre_Producto.Contains(Nombre)).OrderBy(a=>a.Nombre_Producto).ToList();
+            return View(productos);
+        }
+
+
+        public ActionResult Masculino()
+        {
+            var productos = db.Productos.Include(p => p.Categorias).Include(p => p.Marcas);
+            ViewBag.ID_Categoria = new SelectList(db.Categorias, "ID_Categoria", "Nombre_Categoria");
+            ViewBag.ID_Marca = new SelectList(db.Marcas, "ID_Marca", "Nombre_marca");
+            ViewBag.ID_Genero = new SelectList(db.Genero, "ID_Genero", "Nombre_Genero");
+            return View(productos.ToList());
+        }
+
+     
         // GET: Productos/Details/5
         public ActionResult Details(int? id)
         {
@@ -46,15 +65,20 @@ namespace Proyecto_Tienda_Malena.Controllers
         {
             ViewBag.ID_Categoria = new SelectList(db.Categorias, "ID_Categoria", "Nombre_Categoria");
             ViewBag.ID_Marca = new SelectList(db.Marcas, "ID_Marca", "Nombre_marca");
+            ViewBag.ID_Genero = new SelectList(db.Genero, "ID_Genero", "Nombre_Genero");
+
             return View();
         }
+
+
+              
 
         // POST: Productos/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_Producto,ID_Categoria,ID_Marca,Nombre_Producto,Imagen_Producto,Descripcion_Producto,Stock,Precio,Descuento,Destacado")] Productos productos)
+        public ActionResult Create([Bind(Include = "ID_Producto,ID_Categoria,ID_Marca,ID_Genero,Nombre_Producto,Imagen_Producto,Descripcion_Producto,Stock,Precio,Descuento,Destacado")] Productos productos)
         {
 
             HttpPostedFileBase FileBase = Request.Files[0];
@@ -65,14 +89,14 @@ namespace Proyecto_Tienda_Malena.Controllers
 
             if (ModelState.IsValid)
             {
-                if (noExisteProducto(productos))
+                if (NoExisteProducto(productos))
                 {
                     db.Productos.Add(productos);
                     try
                     {
                         db.SaveChanges();
                     }
-                    catch (DbEntityValidationException e)
+                    catch (DbEntityValidationException )
                     {
                         
 
@@ -90,9 +114,10 @@ namespace Proyecto_Tienda_Malena.Controllers
 
             ViewBag.ID_Categoria = new SelectList(db.Categorias, "ID_Categoria", "Nombre_Categoria", productos.ID_Categoria);
             ViewBag.ID_Marca = new SelectList(db.Marcas, "ID_Marca", "Nombre_marca", productos.ID_Marca);
+            ViewBag.ID_Genero = new SelectList(db.Genero, "ID_Genero", "Nombre_Genero", productos.ID_Genero);
             return View(productos);
         }
-        public bool noExisteProducto(Productos producto)
+        public bool NoExisteProducto(Productos producto)
         {
             if (db.Productos.Where(p => p.ID_Producto == producto.ID_Producto
             || p.Nombre_Producto == producto.Nombre_Producto).Count() == 0)
@@ -117,6 +142,8 @@ namespace Proyecto_Tienda_Malena.Controllers
             }
             ViewBag.ID_Categoria = new SelectList(db.Categorias, "ID_Categoria", "Nombre_Categoria", productos.ID_Categoria);
             ViewBag.ID_Marca = new SelectList(db.Marcas, "ID_Marca", "Nombre_marca", productos.ID_Marca);
+            ViewBag.ID_Genero = new SelectList(db.Genero, "ID_Genero", "Nombre_Genero", productos.ID_Genero);
+
             return View(productos);
         }
 
@@ -125,8 +152,29 @@ namespace Proyecto_Tienda_Malena.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_Producto,ID_Categoria,ID_Marca,Nombre_Producto,Imagen_Producto,Descripcion_Producto,Stock,Precio,Descuento,Destacado")] Productos productos)
+        public ActionResult Edit([Bind(Include = "ID_Producto,ID_Categoria,ID_Marca,ID_Genero,Nombre_Producto,Imagen_Producto,Descripcion_Producto,Stock,Precio,Descuento,Destacado")] Productos productos)
         {
+
+            byte[] imagenActual = null;
+
+
+            HttpPostedFileBase FileBase = Request.Files[0];
+
+            if (FileBase == null)
+            {
+
+                imagenActual = db.Productos.SingleOrDefault(t => t.ID_Producto == productos.ID_Producto).Imagen_Producto;
+            }
+            else
+            {
+
+                WebImage image = new WebImage(FileBase.InputStream);
+
+                productos.Imagen_Producto = image.GetBytes();
+
+            }
+
+
             if (ModelState.IsValid)
             {
                 db.Entry(productos).State = EntityState.Modified;
@@ -135,6 +183,8 @@ namespace Proyecto_Tienda_Malena.Controllers
             }
             ViewBag.ID_Categoria = new SelectList(db.Categorias, "ID_Categoria", "Nombre_Categoria", productos.ID_Categoria);
             ViewBag.ID_Marca = new SelectList(db.Marcas, "ID_Marca", "Nombre_marca", productos.ID_Marca);
+            ViewBag.ID_Genero = new SelectList(db.Genero, "ID_Genero", "Nombre_Genero", productos.ID_Genero);
+
             return View(productos);
         }
 
@@ -173,7 +223,7 @@ namespace Proyecto_Tienda_Malena.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult getImage(int id)
+        public ActionResult GetImage(int id)
         {
             Productos productos = db.Productos.Find(id);
             byte[] byteImage = productos.Imagen_Producto;

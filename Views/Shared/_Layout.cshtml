@@ -13,28 +13,95 @@
 <body>
     <main class="container mw-100 p-0 m-0">
         <header>
-            <nav class="Menu-Lateral">
-                <div class="Menu-Lateral-titulo">@Html.ActionLink("Proyecto", "Admin", "Admin")</div>
+            <nav id="Encabezado" class="navbar navbar-expand-lg Encabezado">
+                <div class="container-fluid">
+                    @Html.ActionLink("Tienda Malena", "Index", "Home")
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
 
-                <div class="Menu-Lateral-nav-links">
-                    @Html.ActionLink("Productos", "Index", "Productos")
-                    @Html.ActionLink("Usuarios", "Index", "Usuarios")
-                    @Html.ActionLink("Volver a la tienda", "Index", "Home")
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        @Html.ActionLink("Cerrar Sesion", "Logout", "Home")
-                    }
+                                <a> @Html.ActionLink("Productos", "Index", "Productos")</a>
+                            </li>
+
+                            <li class="nav-item">
+
+                                <a> @Html.ActionLink("Usuarios", "Index", "Usuarios")</a>
+                            </li>
+
+
+                            <li class="nav-item">
+
+                                <a> @Html.ActionLink("Volver a la tienda", "Index", "Home")</a>
+                            </li>
+
+                        </ul>
+                        <ul class="navbar-nav mb-2 mb-lg-0">
+
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li>Bienvenido @User.Identity.Name</li>
+                                <li>@Html.ActionLink("Cerrar Sesion", "Logout", "Home")</li>
+                            }
+                            else
+                            {
+                                <li>@Html.ActionLink("Inicio Sesion", "InicioSesion", "Home")</li>
+                                <li>@Html.ActionLink("Registro", "Registro", "Home")</li>
+
+                            }
+                        </ul>
+
+                    </div>
                 </div>
-
-
             </nav>
         </header>
-        <section class=" row m-0 p-0">
-            <div class="admin-contenido">
-                @RenderBody()
-            </div>
+        <section class="Contenido row d-flex justify-content-around p-0 m-0">
+            @RenderBody()
         </section>
     </main>
+
+    <footer class="pie-pagina">
+        <div class="container pie-pagina-encabezado">
+            <div class="row ">
+                <div class="col-6">
+                    <h4 class="footer-heading">Proyecto</h4>
+                    <p>
+                        Tienda en linea de ropa Malena Store.
+                    </p>
+                </div>
+                <div class="col-6">
+                    <h4 class="footer-heading">Contactanos por los siguientes medios:</h4>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#">Pagina de Facebook</a>
+                            - <a href="#">Pagina de Instagram</a>
+                        </li>
+                        <li>
+                            <a>Telefono:2716-8462</a> - <a href="#">Whatsapp</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="w-100 mt-5 border-top py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-8">
+                        <p class="copyright">
+                            Copyright ©
+                            <script>document.write(new Date().getFullYear());</script> Derechos reservados
+                        </p>
+                    </div>
+                    <div class="col-4 text-md-right">
+                        <p>
+                            Boutique Malena
+                            
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
             crossorigin="anonymous"></script>

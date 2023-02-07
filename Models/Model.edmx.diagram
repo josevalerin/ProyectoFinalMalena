@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f826f574f06b47b08e37273aadbf7104" Name="Diagram1">
+        <EntityTypeShape EntityType="Proyecto_Tienda_MalenaModel.Categorias" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Proyecto_Tienda_MalenaModel.Comentarios" Width="1.5" PointX="8.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Proyecto_Tienda_MalenaModel.Factura" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Proyecto_Tienda_MalenaModel.Genero" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Proyecto_Tienda_MalenaModel.Marcas" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Proyecto_Tienda_MalenaModel.Productos" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Proyecto_Tienda_MalenaModel.Proveedores" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Proyecto_Tienda_MalenaModel.Review" Width="1.5" PointX="8.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Proyecto_Tienda_MalenaModel.ROLES" Width="1.5" PointX="3.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Proyecto_Tienda_MalenaModel.Sede" Width="1.5" PointX="10.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Proyecto_Tienda_MalenaModel.Usuarios" Width="1.5" PointX="6" PointY="8" IsExpanded="true" />
+        <AssociationConnector Association="Proyecto_Tienda_MalenaModel.FK__Productos__ID_Ca__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="Proyecto_Tienda_MalenaModel.FK__Comentari__ID_Us__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="Proyecto_Tienda_MalenaModel.FK__Factura__ID_Prod__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="Proyecto_Tienda_MalenaModel.FK__Factura__ID_Usua__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="Proyecto_Tienda_MalenaModel.FK__Productos__ID_Ge__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="Proyecto_Tienda_MalenaModel.FK__Productos__ID_Ma__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="Proyecto_Tienda_MalenaModel.FK__Review__ID_Produ__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="Proyecto_Tienda_MalenaModel.FK__Review__ID_Usuar__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="Proyecto_Tienda_MalenaModel.FK__Usuarios__ID_ROL__44FF419A" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
